@@ -41,12 +41,3 @@ The Tech Studio Student Management System is an Express server designed to store
 ## Developer
 
 This project was developed by [Oladapo Mubarak](https://github.com/Muba-rak).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-```
-
-Make sure to replace placeholders like `your-username` and `your-github-username` with the appropriate values. Additionally, update the `LICENSE` section if you have a specific license for your project.
-```
