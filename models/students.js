@@ -5,9 +5,13 @@ const payment = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  reciept: {
+  receipt: {
     type: String,
     required: true,
+  },
+  paymentType: {
+    type: String,
+    enum: ["cash", "bank transfer", "bank deposit"],
   },
   datePaid: {
     type: Date,
@@ -63,7 +67,7 @@ const studentSchema = new mongoose.Schema(
     },
     referralStudentId: {
       type: String,
-      required: true,
+      // required: true,
     },
     emergencyContactName: {
       type: String,
@@ -81,7 +85,7 @@ const studentSchema = new mongoose.Schema(
     paymentStatus: {
       type: String,
       enum: ["part", "full"],
-      required: true,
+      // required: true,
     },
   },
   { timestamps: true }

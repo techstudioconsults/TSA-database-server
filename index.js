@@ -2,11 +2,23 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
+const cloudinary = require("cloudinary").v2;
 const PORT = process.env.PORT || 3000;
+const fileUpload = require("express-fileupload");
 const studentRouter = require("./routes/studentRouter");
 
-//middleware
+//cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
+
+//middlewares
+app.use(fileUpload({ useTempFiles: true }));
 app.use(express.json());
+app.use(cors());
 
 //route
 app.get("/", (req, res) => {
