@@ -2,35 +2,11 @@ const Student = require("../models/students");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 const { checkInputs } = require("../utils/helpers");
-
-function getCourseTypeAbbreviation(classType) {
-  switch (classType) {
-    case "weekend":
-      return "WE";
-    case "weekday":
-      return "WD";
-    case "online":
-      return "ON";
-    default:
-      return "";
-  }
-}
-function getCourseCode(courseCohort) {
-  if (courseCohort.toLowerCase().includes("fullstack")) {
-    return "01";
-  } else if (courseCohort.toLowerCase().includes("frontend")) {
-    return "02";
-  } else if (
-    courseCohort.toLowerCase().includes("product") ||
-    courseCohort.toLowerCase().includes("ui")
-  ) {
-    return "03";
-  } else if (courseCohort.toLowerCase().includes("data")) {
-    return "04";
-  } else if (courseCohort.toLowerCase().includes("cyber")) {
-    return "05";
-  }
-}
+const {
+  getCourseFee,
+  getCourseTypeAbbreviation,
+  getCourseCode,
+} = require("../utils/studentHelper");
 
 const generateStudentId = async (classType, courseCohort) => {
   const date = new Date();
@@ -105,9 +81,11 @@ const handleAddStudent = async (req, res) => {
 
     //studentId
     const studentId = await generateStudentId(classType, courseCohort);
+    // get course fee
+    const courseFee = getCourseFee(classType, courseCohort);
 
     //add to db
-    const student = await Student.create({
+    const newStudent = new Student({
       fullName,
       pka,
       email,
@@ -120,8 +98,11 @@ const handleAddStudent = async (req, res) => {
       emergencyContactNumber,
       payment,
       studentId,
+      courseFee,
       image: imageResult.secure_url,
     });
+
+    const student = await newStudent.save();
 
     res.status(200).json({
       success: true,
@@ -134,10 +115,24 @@ const handleAddStudent = async (req, res) => {
 };
 
 const getAllStudents = async (req, res) => {
-  res.send("get all students");
+  //add query search by name, studentId, courseCohort
+  try {
+    const students = await Student.find().sort("-createdAt");
+    res.status(200).json({ success: true, students });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 const getAStudent = async (req, res) => {
-  res.send("get a student");
+  const { studentId } = req.params;
+  try {
+    const student = await Student.findById({ _id: studentId });
+    res.status(200).json({ success: true, student });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 module.exports = { handleAddStudent, getAllStudents, getAStudent };

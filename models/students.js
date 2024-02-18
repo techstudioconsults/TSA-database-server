@@ -87,8 +87,29 @@ const studentSchema = new mongoose.Schema(
       enum: ["part", "full"],
       // required: true,
     },
+    balance: {
+      type: Number,
+    },
+    courseFee: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );
+
+// Pre-save hook to calculate the balance after each payment
+studentSchema.pre("save", function (next) {
+  const totalAmountPaid = this.payment.reduce(
+    (sum, payment) => sum + payment.amount,
+    0
+  );
+  this.balance = this.courseFee - totalAmountPaid;
+
+  // Update paymentStatus to 'full' if the balance is 0
+  this.paymentStatus = this.balance === 0 ? "full" : "part";
+
+  next();
+});
 
 module.exports = mongoose.model("Student", studentSchema);
