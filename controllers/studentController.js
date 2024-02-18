@@ -77,7 +77,7 @@ const handleAddStudent = async (req, res) => {
     fs.unlinkSync(req.files.receipt.tempFilePath);
 
     //set up payment
-    const payment = { amount, receipt: receiptResult.secure_url };
+    const payments = { amount, receipt: receiptResult.secure_url };
 
     //studentId
     const studentId = await generateStudentId(classType, courseCohort);
@@ -96,7 +96,7 @@ const handleAddStudent = async (req, res) => {
       emergencyContactName,
       emergencyContactLocation,
       emergencyContactNumber,
-      payment,
+      payments,
       studentId,
       courseFee,
       image: imageResult.secure_url,

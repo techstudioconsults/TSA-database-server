@@ -7,7 +7,7 @@ const getStudentPaymentRecord = async (req, res) => {
   const { studentId } = req.params;
   try {
     const student = await Student.findById({ _id: studentId });
-    const payments = student.payment;
+    const payments = student.payments;
     res.status(200).json({ success: true, payments });
   } catch (error) {
     console.log(error);
@@ -46,10 +46,10 @@ const addPaymentRecord = async (req, res) => {
     };
 
     //add new payment
-    student.payment.push(newPayment);
+    student.payments.push(newPayment);
     await student.save();
 
-    res.status(200).json({ success: true, payment: student.payment });
+    res.status(200).json({ success: true, payment: student.payments });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
@@ -66,7 +66,7 @@ const editPaymentRecord = async (req, res) => {
       return res.status(404).json({ message: "Student not found" });
     }
     // Find the payment record within the student's payments array
-    const paymentToEdit = student.payment.id(paymentId);
+    const paymentToEdit = student.payments.id(paymentId);
     if (!paymentToEdit) {
       return res.status(404).json({ error: "Payment record not found" });
     }
@@ -96,7 +96,7 @@ const editPaymentRecord = async (req, res) => {
     const updatedStudent = await student.save();
     res.status(200).json({
       success: true,
-      payment: updatedStudent.payment,
+      payment: updatedStudent.payments,
       balance: updatedStudent.balance,
       paymentStatus: updatedStudent.paymentStatus,
     });

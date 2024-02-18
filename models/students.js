@@ -81,7 +81,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    payment: [payment],
+    payments: [payment],
     paymentStatus: {
       type: String,
       enum: ["part", "full"],
