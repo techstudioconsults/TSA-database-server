@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 //pka- popularlyKnownas
 const payment = new mongoose.Schema({
+  adminId: {
+    type: mongoose.Types.ObjectId,
+  },
   amount: {
     type: Number,
     required: true,
@@ -81,7 +84,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    payment: [payment],
+    payments: [payment],
     paymentStatus: {
       type: String,
       enum: ["part", "full"],
@@ -100,7 +103,7 @@ const studentSchema = new mongoose.Schema(
 
 // Pre-save hook to calculate the balance after each payment
 studentSchema.pre("save", function (next) {
-  const totalAmountPaid = this.payment.reduce(
+  const totalAmountPaid = this.payments.reduce(
     (sum, payment) => sum + payment.amount,
     0
   );

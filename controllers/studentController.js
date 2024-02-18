@@ -77,7 +77,7 @@ const handleAddStudent = async (req, res) => {
     fs.unlinkSync(req.files.receipt.tempFilePath);
 
     //set up payment
-    const payment = { amount, receipt: receiptResult.secure_url };
+    const payments = { amount, receipt: receiptResult.secure_url };
 
     //studentId
     const studentId = await generateStudentId(classType, courseCohort);
@@ -96,7 +96,7 @@ const handleAddStudent = async (req, res) => {
       emergencyContactName,
       emergencyContactLocation,
       emergencyContactNumber,
-      payment,
+      payments,
       studentId,
       courseFee,
       image: imageResult.secure_url,
@@ -115,15 +115,29 @@ const handleAddStudent = async (req, res) => {
 };
 
 const getAllStudents = async (req, res) => {
-  //add query search by name, studentId, courseCohort
+  const { searchTerm } = req.query;
+  const queryObject = {};
+  // search by studentId, name, courseCohort
+  if (searchTerm) {
+    const regex = { $regex: searchTerm, $options: "i" };
+    queryObject.$or = [
+      { studentId: regex },
+      { fullName: regex },
+      { courseCohort: regex },
+    ];
+  }
+
   try {
-    const students = await Student.find().sort("-createdAt");
-    res.status(200).json({ success: true, students });
+    const students = await Student.find(queryObject).sort("-createdAt");
+    res
+      .status(200)
+      .json({ success: true, numOfStudents: students.length, students });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 const getAStudent = async (req, res) => {
   const { studentId } = req.params;
   try {
@@ -135,4 +149,8 @@ const getAStudent = async (req, res) => {
   }
 };
 
-module.exports = { handleAddStudent, getAllStudents, getAStudent };
+module.exports = {
+  handleAddStudent,
+  getAllStudents,
+  getAStudent,
+};
