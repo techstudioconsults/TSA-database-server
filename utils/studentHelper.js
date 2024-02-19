@@ -79,7 +79,7 @@ const getProductDesignFee = (classType) => {
   }
 };
 
-function getCourseTypeAbbreviation(classType) {
+const getCourseTypeAbbreviation = (classType) => {
   switch (classType) {
     case "weekend":
       return "WE";
@@ -90,8 +90,8 @@ function getCourseTypeAbbreviation(classType) {
     default:
       return "";
   }
-}
-function getCourseCode(courseCohort) {
+};
+const getCourseCode = (courseCohort) => {
   if (courseCohort.toLowerCase().includes("fullstack")) {
     return "01";
   } else if (courseCohort.toLowerCase().includes("frontend")) {
@@ -106,6 +106,6 @@ function getCourseCode(courseCohort) {
   } else if (courseCohort.toLowerCase().includes("cyber")) {
     return "05";
   }
-}
+};
 
 module.exports = { getCourseFee, getCourseTypeAbbreviation, getCourseCode };

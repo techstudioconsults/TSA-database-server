@@ -60,7 +60,7 @@ const handleAddStudent = async (req, res) => {
   try {
     if (!payload) {
       console.log(payload);
-      return res.status(400).json({ message: "Incomplete Payload" });
+      return res.status(400).json({ error: "Incomplete Payload" });
     }
     // upload image
     const imageResult = await cloudinary.uploader.upload(image, {
@@ -117,13 +117,14 @@ const handleAddStudent = async (req, res) => {
 const getAllStudents = async (req, res) => {
   const { searchTerm } = req.query;
   const queryObject = {};
-  // search by studentId, name, courseCohort
+  // search by studentId, name, courseCohort, pka
   if (searchTerm) {
     const regex = { $regex: searchTerm, $options: "i" };
     queryObject.$or = [
       { studentId: regex },
       { fullName: regex },
       { courseCohort: regex },
+      { pka: regex },
     ];
   }
 
