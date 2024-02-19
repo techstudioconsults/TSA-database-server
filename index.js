@@ -7,6 +7,7 @@ const cloudinary = require("cloudinary").v2;
 const PORT = process.env.PORT || 3000;
 const fileUpload = require("express-fileupload");
 const studentRouter = require("./routes/studentRouter");
+const adminRouter = require("./routes/adminRouter");
 
 //cloudinary config
 cloudinary.config({
@@ -26,10 +27,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/student", studentRouter);
+app.use("/api/v1", adminRouter);
 
 //error route
 app.use((req, res) => {
-  res.status(404).send("Resouce Not Found");
+  res.status(404).json({ error: "Resouce Not Found" });
 });
 
 const startSerer = async () => {

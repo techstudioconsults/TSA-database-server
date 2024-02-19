@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 //pka- popularlyKnownas
 const payment = new mongoose.Schema({
-  adminId: {
-    type: mongoose.Types.ObjectId,
-  },
   amount: {
     type: Number,
     required: true,
@@ -89,6 +86,10 @@ const studentSchema = new mongoose.Schema(
       type: String,
       enum: ["part", "full"],
       // required: true,
+    },
+    modifiedBy: {
+      type: mongoose.Types.ObjectId,
+      ref: "admin",
     },
     balance: {
       type: Number,
