@@ -1,5 +1,7 @@
 const Student = require("../models/students");
 const { checkInputs } = require("../utils/helpers");
+const sendEmail = require("../utils/SendEmail");
+
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 
@@ -137,7 +139,26 @@ const editPaymentRecord = async (req, res) => {
 };
 
 const sendReminder = async (req, res) => {
-  res.send("send Reminder");
+  const { studentId } = req.params;
+  const { comments } = req.body;
+  try {
+    if (!comments) {
+      return res.status(404).json({ error: "Incomplete Payload" });
+    }
+    const student = await Student.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    const email = student.email;
+    sendEmail({
+      to: email,
+      message: `reminder: ${comments}`,
+    });
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 module.exports = {
   getStudentPaymentRecord,
