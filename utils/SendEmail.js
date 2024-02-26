@@ -1,6 +1,6 @@
 const { createTransport } = require("nodemailer");
 
-const sendEmail = ({ to, message }) => {
+const sendEmail = ({ to, message, subject }) => {
   const transporter = createTransport({
     host: "smtp-relay.sendinblue.com",
     port: 2525,
@@ -14,7 +14,7 @@ const sendEmail = ({ to, message }) => {
   const mailOptions = {
     from: process.env.FROM, // sender address
     to: to, // email of the reciever
-    subject: "Tech Studio Payment Reminder", // Subject line
+    subject: subject, // Subject line
     html: message, // html body that contains
   };
 
