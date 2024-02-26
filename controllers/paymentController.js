@@ -1,7 +1,6 @@
 const Student = require("../models/students");
 const { checkInputs } = require("../utils/helpers");
 const sendEmail = require("../utils/SendEmail");
-
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 
