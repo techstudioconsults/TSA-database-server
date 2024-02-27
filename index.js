@@ -34,7 +34,7 @@ app.use((req, res) => {
   res.status(404).json({ error: "Resouce Not Found" });
 });
 
-const startSerer = async () => {
+const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL, { dbName: "TSADATABASE" });
     app.listen(PORT, () => {
@@ -44,4 +44,4 @@ const startSerer = async () => {
     console.log(error);
   }
 };
-startSerer();
+startServer();
