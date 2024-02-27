@@ -26,62 +26,82 @@
       place-items: center;
     "
   >
-    <div
-      style="
-        background-image: url('https://res.cloudinary.com/dlb8nbz13/image/upload/v1708955734/bg_uuibvj.png');
-        background-repeat: no-repeat;
-        background-position: top right;
-        background-color: white;
-        display: grid;
-        place-items: center;
-        width: 80%;
-        max-width: 570px;
-        max-height: 504px;
-        text-align: center;
-        padding: 30px;
-        border-radius: 25.5px;
-        margin: 50px auto;
-      "
-    >
-      <section>
+    <div style="width: 100%; max-width: 520px; margin: auto">
+      <div
+        style="
+          background-color: #1f2666;
+          height: 80px;
+          width: 100%;
+          margin: 0;
+          border-top-left-radius: 25.5px;
+          border-top-right-radius: 25.5px;
+          display: grid;
+          place-items: center;
+        "
+      >
         <img
-          src="https://res.cloudinary.com/dlb8nbz13/image/upload/v1708955801/tag_kx717p.png"
-          alt="Tag Icon"
-          style="
-            margin: 10px auto;
-            color: #1e1e1e;
-            font-size: 32.81px;
-            font-weight: 700;
-          "
+          src="https://res.cloudinary.com/dlb8nbz13/image/upload/v1709020595/512_1_szyqry.png"
+          alt="tsa logo"
+          style="display: block; margin: auto"
         />
-        <p
-          style="
-            color: #1e1e1e;
-            font-size: 32px;
-            font-weight: 700;
-            margin: 8px auto;
-          "
-        >
-          {{name}}
-        </p>
-        <p style="color: #747474; font-size: 24px; font-weight: 600">
-          {{StudentId}}
-        </p>
-        <p
-          style="
-            color: #747474;
-            margin: 5px auto;
-            font-family: 'Open Sans';
-            font-size: 24px;
-            font-weight: 400;
-            line-height: 35px;
-            letter-spacing: 0em;
-            text-transform: capitalize;
-          "
-        >
-          {{course Cohort}}
-        </p>
-      </section>
+      </div>
+      <div
+        style="
+          background-image: url('https://res.cloudinary.com/dlb8nbz13/image/upload/v1708955734/bg_uuibvj.png');
+          background-repeat: no-repeat;
+          background-position: top right;
+          background-color: white;
+          display: grid;
+          place-items: center;
+          max-height: 504px;
+          text-align: center;
+          padding: 30px;
+          border-bottom-right-radius: 25.5px;
+          border-bottom-left-radius: 25.5px;
+
+          margin: auto;
+        "
+      >
+        <section>
+          <img
+            src="https://res.cloudinary.com/dlb8nbz13/image/upload/v1708955801/tag_kx717p.png"
+            alt="Tag Icon"
+            style="
+              margin: 10px auto;
+              color: #1e1e1e;
+              font-size: 32.81px;
+              font-weight: 700;
+            "
+          />
+          <p
+            style="
+              color: #1e1e1e;
+              font-size: 32px;
+              font-weight: 700;
+              margin: 8px auto;
+            "
+          >
+            {{name}}
+          </p>
+          <p style="color: #747474; font-size: 24px; font-weight: 600">
+            {{StudentId}}
+          </p>
+          <p
+            style="
+              color: #747474;
+              margin: 5px auto;
+              font-family: 'Open Sans';
+              font-size: 24px;
+              font-weight: 400;
+              line-height: 35px;
+              letter-spacing: 0em;
+              text-transform: capitalize;
+            "
+          >
+            {{course Cohort}}
+          </p>
+        </section>
+      </div>
     </div>
   </body>
 </html>

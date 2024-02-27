@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 
 const readHtmlTemplate = (templatePath) => {
-  const filePath = path.join(__dirname, "..", templatePath);
+  const filePath = path.join(__dirname, "..", "public", templatePath);
   return fs.readFileSync(filePath, "utf-8");
 };
 
@@ -151,6 +151,23 @@ const editPaymentRecord = async (req, res) => {
 
     // Save the updated student with the edited payment record
     const updatedStudent = await student.save();
+    //send payment tag to student with complete payment
+    if (updatedStudent.paymentStatus === "full") {
+      // Read HTML email template for payment tags
+      const htmlTemplate = readHtmlTemplate("index.html");
+
+      // Replace placeholders in the template
+      const formattedHtml = htmlTemplate
+        .replace("{{name}}", updatedStudent.fullName)
+        .replace("{{StudentId}}", updatedStudent.studentId)
+        .replace("{{course Cohort}}", updatedStudent.courseCohort);
+      const { email } = student;
+      sendEmail({
+        to: email,
+        message: formattedHtml,
+        subject: "Tech Studio Payment Tag",
+      });
+    }
     res.status(200).json({
       success: true,
       message: "payment updated successfully",
