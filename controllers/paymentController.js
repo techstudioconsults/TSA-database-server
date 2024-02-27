@@ -179,25 +179,27 @@ const editPaymentRecord = async (req, res) => {
 };
 
 const sendReminder = async (req, res) => {
-  const { studentId } = req.params;
-  const { comments } = req.body;
+  const { studentId, comments } = req.body;
+
   try {
-    if (!comments) {
-      return res.status(404).json({ error: "Incomplete Payload" });
-    }
-    const student = await Student.findById(studentId);
+    // Retrieve student information based on student ID
+    const student = await Student.findOne({ studentId });
+
     if (!student) {
       return res.status(404).json({ error: "Student not found" });
     }
-    const email = student.email;
-    sendEmail({
-      to: email,
-      message: `reminder ${comments}`,
-      subject: "Tech Studio Payment Reminder",
-    });
-    res.status(200).json({ success: true });
+
+    // Extract student information
+    const { fullName, email, phoneNumber } = student;
+
+    // Send reminder email
+    await sendingReminderEmail({ email, studentId, name: fullName, comments });
+
+    res
+      .status(200)
+      .json({ success: true, message: "Reminder email sent successfully" });
   } catch (error) {
-    console.log(error);
+    console.error("Error sending reminder:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
