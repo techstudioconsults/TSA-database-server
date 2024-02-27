@@ -137,6 +137,7 @@ const editPaymentRecord = async (req, res) => {
 };
 
 const sendReminder = async (req, res) => {
+  //where i am implementing my code
   res.send("send Reminder");
 };
 module.exports = {
