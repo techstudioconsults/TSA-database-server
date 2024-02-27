@@ -1,7 +1,14 @@
 const Student = require("../models/students");
 const { checkInputs } = require("../utils/helpers");
+const sendEmail = require("../utils/SendEmail");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+const path = require("path");
+
+const readHtmlTemplate = (templatePath) => {
+  const filePath = path.join(__dirname, "..", "public", templatePath);
+  return fs.readFileSync(filePath, "utf-8");
+};
 
 const getStudentPaymentRecord = async (req, res) => {
   const { studentId } = req.params;
@@ -76,6 +83,24 @@ const addPaymentRecord = async (req, res) => {
     student.modifiedBy = adminId;
     await student.save();
 
+    //send payment tag to student with complete payment
+    if (student.paymentStatus === "full") {
+      // Read HTML email template for payment tags
+      const htmlTemplate = readHtmlTemplate("index.html");
+
+      // Replace placeholders in the template
+      const formattedHtml = htmlTemplate
+        .replace("{{name}}", student.fullName)
+        .replace("{{StudentId}}", student.studentId)
+        .replace("{{course Cohort}}", student.courseCohort);
+      const { email } = student;
+      sendEmail({
+        to: email,
+        message: formattedHtml,
+        subject: "Tech Studio Payment Tag",
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: "new payment added",
@@ -126,6 +151,23 @@ const editPaymentRecord = async (req, res) => {
 
     // Save the updated student with the edited payment record
     const updatedStudent = await student.save();
+    //send payment tag to student with complete payment
+    if (updatedStudent.paymentStatus === "full") {
+      // Read HTML email template for payment tags
+      const htmlTemplate = readHtmlTemplate("index.html");
+
+      // Replace placeholders in the template
+      const formattedHtml = htmlTemplate
+        .replace("{{name}}", updatedStudent.fullName)
+        .replace("{{StudentId}}", updatedStudent.studentId)
+        .replace("{{course Cohort}}", updatedStudent.courseCohort);
+      const { email } = student;
+      sendEmail({
+        to: email,
+        message: formattedHtml,
+        subject: "Tech Studio Payment Tag",
+      });
+    }
     res.status(200).json({
       success: true,
       message: "payment updated successfully",
@@ -137,8 +179,29 @@ const editPaymentRecord = async (req, res) => {
 };
 
 const sendReminder = async (req, res) => {
-  res.send("send Reminder");
+  const { studentId } = req.params;
+  const { comments } = req.body;
+  try {
+    if (!comments) {
+      return res.status(404).json({ error: "Incomplete Payload" });
+    }
+    const student = await Student.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    const email = student.email;
+    sendEmail({
+      to: email,
+      message: `reminder ${comments}`,
+      subject: "Tech Studio Payment Reminder",
+    });
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
+
 module.exports = {
   getStudentPaymentRecord,
   addPaymentRecord,
