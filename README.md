@@ -40,4 +40,7 @@ The Tech Studio Student Management System is an Express server designed to store
 
 ## Developer
 
-This project was developed by [Oladapo Mubarak](https://github.com/Muba-rak).
+This project was developed by
+
+1. [Oladapo Mubarak](https://github.com/Muba-rak).
+1. [Shobowale Aduragbemi](https://github.com/AduragbemiShobowale).
