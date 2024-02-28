@@ -37,6 +37,7 @@ const handleAddStudent = async (req, res) => {
     emergencyContactLocation,
     emergencyContactNumber,
     amount,
+    referralStudentId,
   } = req.body;
   // console.log(req.body);
 
@@ -84,6 +85,16 @@ const handleAddStudent = async (req, res) => {
     // get course fee
     const courseFee = getCourseFee(classType, courseCohort);
 
+    // find and store referralStudentName
+    let referralStudentName = "";
+    if (referralStudentId) {
+      const regex = { $regex: referralStudentId, $options: "i" };
+      const referral = await Student.findOne({ studentId: regex });
+      if (referral) {
+        referralStudentName = referral.fullName;
+      }
+    }
+
     //add to db
     const newStudent = new Student({
       fullName,
@@ -100,6 +111,8 @@ const handleAddStudent = async (req, res) => {
       studentId,
       courseFee,
       image: imageResult.secure_url,
+      referralStudentId,
+      referralStudentName,
     });
 
     const student = await newStudent.save();
@@ -150,8 +163,30 @@ const getAStudent = async (req, res) => {
   }
 };
 
+const handleEditStudent = async (req, res) => {
+  const { studentId } = req.params;
+  try {
+    const student = await Student.findById({ _id: studentId });
+    if (!student) {
+      return res.status(404).json({ error: "Student Not Found" });
+    }
+    const updatedStudent = await Student.findByIdAndUpdate(
+      { _id: studentId },
+      req.body,
+      { new: true, runValidators: true }
+    );
+    res
+      .status(200)
+      .json({ success: true, message: "Student info updated correctly" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   handleAddStudent,
   getAllStudents,
   getAStudent,
+  handleEditStudent,
 };

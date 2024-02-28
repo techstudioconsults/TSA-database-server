@@ -69,6 +69,10 @@ const studentSchema = new mongoose.Schema(
       type: String,
       // required: true,
     },
+    referralStudentName: {
+      type: String,
+      // required: true,
+    },
     emergencyContactName: {
       type: String,
       required: true,
@@ -93,6 +97,7 @@ const studentSchema = new mongoose.Schema(
     },
     balance: {
       type: Number,
+      min: 0,
     },
     courseFee: {
       type: Number,
@@ -116,13 +121,10 @@ studentSchema.pre("save", function (next) {
   );
 
   // Calculate the discount  of the total amount paid
-  const discountAmount = (this.discount / 100) * totalAmountPaid;
-
-  // Subtract the discount from the total amount paid
-  const discountedAmountPaid = totalAmountPaid - discountAmount;
+  const discountAmount = (this.discount / 100) * this.courseFee;
 
   // Calculate the balance after subtracting the discounted amount
-  this.balance = this.courseFee - discountedAmountPaid;
+  this.balance = this.courseFee - (discountAmount + totalAmountPaid);
 
   // Update paymentStatus to 'full' if the balance is 0
   this.paymentStatus = this.balance === 0 ? "full" : "part";
