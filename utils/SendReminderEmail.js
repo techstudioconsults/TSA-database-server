@@ -35,7 +35,7 @@ const sendingReminderEmail = async ({ email, studentId, name, comments }) => {
 
     // Send the reminder email
     await transporter.sendMail({
-      from: process.env.USER,
+      from: process.env.FROM,
       to: email,
       subject: "Payment Reminder",
       html: emailHtml,

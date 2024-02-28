@@ -114,8 +114,14 @@ const addPaymentRecord = async (req, res) => {
 const editPaymentRecord = async (req, res) => {
   const { studentId, paymentId } = req.params;
   const { adminId } = req.user;
-  const { amount, datePaid, paymentType, comment, paymentVerification } =
-    req.body;
+  const {
+    amount,
+    datePaid,
+    paymentType,
+    comment,
+    paymentVerification,
+    discount,
+  } = req.body;
   try {
     const student = await Student.findById(studentId);
     if (!student) {
@@ -148,6 +154,7 @@ const editPaymentRecord = async (req, res) => {
     paymentToEdit.datePaid = datePaid || paymentToEdit.datePaid;
     paymentToEdit.paymentType = paymentType || paymentToEdit.paymentType;
     student.modifiedBy = adminId || student.modifiedBy;
+    student.discount = discount || student.discount;
 
     // Save the updated student with the edited payment record
     const updatedStudent = await student.save();
