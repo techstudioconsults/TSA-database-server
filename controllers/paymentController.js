@@ -1,6 +1,7 @@
 const Student = require("../models/students");
 const { checkInputs } = require("../utils/helpers");
 const sendEmail = require("../utils/SendEmail");
+const { sendingReminderEmail } = require("../utils/SendReminderEmail");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 const path = require("path");
@@ -94,6 +95,7 @@ const addPaymentRecord = async (req, res) => {
         .replace("{{StudentId}}", student.studentId)
         .replace("{{course Cohort}}", student.courseCohort);
       const { email } = student;
+      console.log(email);
       sendEmail({
         to: email,
         message: formattedHtml,
@@ -172,7 +174,7 @@ const editPaymentRecord = async (req, res) => {
       sendEmail({
         to: email,
         message: formattedHtml,
-        subject: "Tech Studio Payment Tag",
+        subject: "Tech Studio Complete Payment Tag",
       });
     }
     res.status(200).json({
@@ -197,10 +199,10 @@ const sendReminder = async (req, res) => {
     }
 
     // Extract student information
-    const { fullName, email, phoneNumber } = student;
+    const { fullName, email } = student;
 
     // Send reminder email
-    await sendingReminderEmail({ email, studentId, name: fullName, comments });
+    await sendingReminderEmail({ email, name: fullName, comments });
 
     res
       .status(200)
