@@ -189,10 +189,11 @@ const editPaymentRecord = async (req, res) => {
 
 const sendReminder = async (req, res) => {
   const { studentId, comments } = req.body;
+  const regex = { $regex: studentId, $options: "i" };
 
   try {
     // Retrieve student information based on student ID
-    const student = await Student.findOne({ studentId });
+    const student = await Student.findOne({ studentId: regex });
 
     if (!student) {
       return res.status(404).json({ error: "Student not found" });
