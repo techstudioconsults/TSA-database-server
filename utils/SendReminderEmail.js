@@ -15,8 +15,8 @@ const emailTemplate = handlebars.compile(emailTemplateSource);
 // Create a Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "brevo",
-  host: "smtp-relay.sendinblue.com",
-  port: 2525,
+  host: "smtp-relay.brevo.com",
+  port: 587,
   secure: false,
   auth: {
     user: process.env.FROM,
@@ -28,10 +28,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to send a reminder email
-const sendingReminderEmail = async ({ email, studentId, name, comments }) => {
+const sendingReminderEmail = async ({ email, name, comments }) => {
   try {
     // Compile the email template with provided data
-    const emailHtml = emailTemplate({ name, studentId, comments });
+    const emailHtml = emailTemplate({ name, comments });
 
     // Send the reminder email
     await transporter.sendMail({

@@ -143,9 +143,29 @@ const getAllStudents = async (req, res) => {
 
   try {
     const students = await Student.find(queryObject).sort("-createdAt");
-    res
-      .status(200)
-      .json({ success: true, numOfStudents: students.length, students });
+    const allStudents = await Student.find().sort("-createdAt");
+    // Calculate totalAmountPaid and totalBalance
+    const totalAmountPaid = allStudents.reduce(
+      (sum, student) =>
+        sum +
+        student.payments.reduce(
+          (paymentSum, payment) => paymentSum + payment.amount,
+          0
+        ),
+      0
+    );
+
+    const totalBalance = allStudents.reduce(
+      (sum, student) => sum + student.balance,
+      0
+    );
+    res.status(200).json({
+      success: true,
+      numOfStudents: allStudents.length,
+      revenue: totalAmountPaid,
+      balance: totalBalance,
+      students,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

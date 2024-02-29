@@ -2,8 +2,8 @@ const { createTransport } = require("nodemailer");
 
 const sendEmail = ({ to, message, subject }) => {
   const transporter = createTransport({
-    host: "smtp-relay.sendinblue.com",
-    port: 2525,
+    host: "smtp-relay.brevo.com",
+    port: 587,
     secure: false,
     auth: {
       // TODO: replace `user` and `pass` values from <https://forwardemail.net>

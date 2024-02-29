@@ -25,6 +25,6 @@ router
   .post(auth, addPaymentRecord);
 router.patch("/:studentId/payment/:paymentId", auth, editPaymentRecord);
 
-router.post("/:studentId/send", sendReminder);
+router.post("/send", sendReminder);
 
 module.exports = router;
