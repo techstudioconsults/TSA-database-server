@@ -10,7 +10,6 @@ const auth = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.user = { adminId: payload.adminId, name: payload.name };
-    // console.log(req.user);
     next();
   } catch (error) {
     console.log(error);
