@@ -7,6 +7,7 @@ const {
   getCourseTypeAbbreviation,
   getCourseCode,
 } = require("../utils/studentHelper");
+const { sendingDocketEmail } = require("../utils/SendDocketEmail");
 
 const generateStudentId = async (classType, courseCohort) => {
   const date = new Date();
@@ -204,9 +205,30 @@ const handleEditStudent = async (req, res) => {
   }
 };
 
+const handleShareEmail = async (req, res) => {
+  const { studentId } = req.params;
+  try {
+    const student = await Student.findById({ _id: studentId });
+    if (!student) {
+      return res.status(404).json({ error: "Student Not Found" });
+    }
+    const { email, fullName, studentId, phoneNumber,  classType, courseCohort, pka, image  } = student;
+
+    await sendingDocketEmail({ email, name: fullName, studentId, phoneNumber, classType, courseCohort, pka, image  });
+
+    res
+      .status(200)
+      .json({ success: true, message: "Reminder email sent successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   handleAddStudent,
   getAllStudents,
   getAStudent,
   handleEditStudent,
+  handleShareEmail,
 };
