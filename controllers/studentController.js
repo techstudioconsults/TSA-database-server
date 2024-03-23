@@ -212,9 +212,27 @@ const handleShareEmail = async (req, res) => {
     if (!student) {
       return res.status(404).json({ error: "Student Not Found" });
     }
-    const { email, fullName, studentId, phoneNumber,  classType, courseCohort, pka, image  } = student;
+    const {
+      email,
+      fullName,
+      studentId,
+      phoneNumber,
+      classType,
+      courseCohort,
+      pka,
+      image,
+    } = student;
 
-    await sendingDocketEmail({ email, name: fullName, studentId, phoneNumber, classType, courseCohort, pka, image  });
+    await sendingDocketEmail({
+      email,
+      name: fullName,
+      studentId,
+      phoneNumber,
+      classType,
+      courseCohort,
+      pka,
+      image,
+    });
 
     res
       .status(200)
@@ -225,10 +243,37 @@ const handleShareEmail = async (req, res) => {
   }
 };
 
+//get studentby their id
+
+const getStudentViaStudentId = async (req, res) => {
+  const { studentId } = req.body;
+  try {
+    if (!studentId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Incomplete Payload" });
+    }
+    const regex = { $regex: studentId, $options: "i" };
+    const student = await Student.findOne({ studentId: regex }).select(
+      "image fullname pka courseCohort studentId email phoneNumber whatsappNumber"
+    );
+
+    if (!student) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Student Not found" });
+    }
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   handleAddStudent,
   getAllStudents,
   getAStudent,
   handleEditStudent,
   handleShareEmail,
+  getStudentViaStudentId,
 };

@@ -4,7 +4,8 @@ const {
   getAllStudents,
   getAStudent,
   handleEditStudent,
-  handleShareEmail
+  handleShareEmail,
+  getStudentViaStudentId,
 } = require("../controllers/studentController");
 
 const {
@@ -18,7 +19,8 @@ const auth = require("../middleware/auth");
 router.route("/").post(handleAddStudent).get(getAllStudents);
 router.get("/:studentId", getAStudent);
 router.patch("/:studentId", handleEditStudent);
-router.get('/email/:studentId', handleShareEmail)
+router.get("/email/:studentId", handleShareEmail);
+router.post("/check", getStudentViaStudentId);
 
 //payment routes
 router
