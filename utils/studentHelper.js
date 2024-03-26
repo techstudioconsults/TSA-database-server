@@ -107,5 +107,25 @@ const getCourseCode = (courseCohort) => {
     return "05";
   }
 };
+const createCourseDuration = (courseCohort) => {
+  if (courseCohort.toLowerCase().includes("fullstack")) {
+    return 16;
+  } else if (courseCohort.toLowerCase().includes("frontend")) {
+    return 16;
+  } else if (courseCohort.toLowerCase().includes("product design")) {
+    return 12;
+  } else if (courseCohort.toLowerCase().includes("data")) {
+    return 12;
+  } else if (courseCohort.toLowerCase().includes("cyber")) {
+    return 12;
+  } else {
+    return null; // Return null for unknown course cohorts
+  }
+};
 
-module.exports = { getCourseFee, getCourseTypeAbbreviation, getCourseCode };
+module.exports = {
+  getCourseFee,
+  getCourseTypeAbbreviation,
+  getCourseCode,
+  createCourseDuration,
+};

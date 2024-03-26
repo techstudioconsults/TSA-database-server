@@ -6,6 +6,7 @@ const {
   getCourseFee,
   getCourseTypeAbbreviation,
   getCourseCode,
+  createCourseDuration,
 } = require("../utils/studentHelper");
 const { sendingDocketEmail } = require("../utils/SendDocketEmail");
 
@@ -56,6 +57,8 @@ const handleAddStudent = async (req, res) => {
     amount
   );
 
+  const courseDuration = createCourseDuration(courseCohort);
+
   const receipt = req.files.receipt.tempFilePath;
   const image = req.files.image.tempFilePath;
 
@@ -105,6 +108,7 @@ const handleAddStudent = async (req, res) => {
       whatsappNumber,
       courseCohort,
       classType,
+      courseDuration,
       emergencyContactName,
       emergencyContactLocation,
       emergencyContactNumber,

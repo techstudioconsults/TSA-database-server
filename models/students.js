@@ -65,6 +65,9 @@ const studentSchema = new mongoose.Schema(
       type: String,
       enum: ["weekday", "weekend", "online"],
     },
+    courseDuration: {
+      type: Number,
+    },
     referralStudentId: {
       type: String,
       // required: true,
