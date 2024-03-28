@@ -36,10 +36,12 @@ const studentSchema = new mongoose.Schema(
     fullName: {
       type: String,
       required: true,
+      trim: true,
     },
     pka: {
       type: String,
       required: true,
+      trim: true,
     },
     studentId: {
       type: String,
@@ -48,18 +50,22 @@ const studentSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      trim: true,
     },
     phoneNumber: {
       type: String,
       required: true,
+      trim: true,
     },
     whatsappNumber: {
       type: String,
       required: true,
+      trim: true,
     },
     courseCohort: {
       type: String,
       required: true,
+      trim: true,
     },
     classType: {
       type: String,
@@ -70,23 +76,24 @@ const studentSchema = new mongoose.Schema(
     },
     referralStudentId: {
       type: String,
-      // required: true,
     },
     referralStudentName: {
       type: String,
-      // required: true,
     },
     emergencyContactName: {
       type: String,
       required: true,
+      trim: true,
     },
     emergencyContactNumber: {
       type: String,
       required: true,
+      trim: true,
     },
     emergencyContactLocation: {
       type: String,
       required: true,
+      trim: true,
     },
     payments: [payment],
     paymentStatus: {
