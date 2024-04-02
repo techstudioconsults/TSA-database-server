@@ -181,6 +181,9 @@ const getAStudent = async (req, res) => {
   const { studentId } = req.params;
   try {
     const student = await Student.findById({ _id: studentId });
+    if (!student) {
+      return res.status(404).json({ error: "Student Not Found" });
+    }
     res.status(200).json({ success: true, student });
   } catch (error) {
     console.log(error);
@@ -210,12 +213,14 @@ const handleEditStudent = async (req, res) => {
 };
 
 const handleShareEmail = async (req, res) => {
-  const { studentId } = req.params;
+  const { traineeId } = req.params;
+  // console.log(traineeId);
   try {
-    const student = await Student.findById({ _id: studentId });
+    const student = await Student.findById({ _id: traineeId });
     if (!student) {
       return res.status(404).json({ error: "Student Not Found" });
     }
+
     const {
       email,
       fullName,
