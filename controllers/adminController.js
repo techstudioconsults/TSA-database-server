@@ -35,7 +35,9 @@ const handleAdminLogin = async (req, res) => {
   try {
     const payload = checkInputs(password, email);
     if (!payload) {
-      return res.status(400).json({ error: "Incomplete Payload" });
+      return res
+        .status(400)
+        .json({ error: "Please Provide Email and Password" });
     }
     const admin = await Admin.findOne({ email });
     if (!admin) {
