@@ -214,7 +214,6 @@ const handleEditStudent = async (req, res) => {
 
 const handleShareEmail = async (req, res) => {
   const { traineeId } = req.params;
-  // console.log(traineeId);
   try {
     const student = await Student.findById({ _id: traineeId });
     if (!student) {
