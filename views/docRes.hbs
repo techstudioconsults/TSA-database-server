@@ -12,259 +12,283 @@
 
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Open
-      Sans", system-ui, sans-serif; } body { display: grid; /* grid-row: 1fr; */
-      justify-content: center; align-items: center; /* height: 100vh; */ width:
-      100%; } .container { background-color: #fafafa; width: 60rem; margin: 0
-      auto; border-radius: 20px; box-shadow: 0 0 2px #5a5a5a; margin-block:
-      2rem; }
+      Sans", system-ui, sans-serif; } body { display: grid; place-items: center;
+      /* height: 100vh; */ width: 100%; } .container { background-color:
+      #fafafa; width: 60rem; margin: 0 auto; border-radius: 20px; box-shadow: 0
+      0 2px #5a5a5a; margin-block: 2rem; }
     </style>
   </head>
   <body>
     <div class="container">
+      <div
+        style="
+          background-color: #1f2666;
+          width: 100%;
+          display: grid;
+          place-items: center;
+          padding: 1rem;
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+        "
+      >
+        <img
+          src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856888/database/techstudiologo_vvgjez.svg"
+          style="width: 36px; height: 36px"
+          alt=""
+        />
+      </div>
+
       <div style="padding: 2rem; padding-block: 3rem">
         <div
           style="
             display: grid;
-            grid-template-columns: 1fr;
-            justify-content: center;
+            grid-template-columns: repeat(2, 1fr);
             width: 100%;
             justify-content: space-between;
             align-items: center;
+            place-items: space-between;
           "
         >
-          <div style="display: grid; grid-template-columns: auto auto">
-            <div style="color: #5a5a5a; gap: 6px">
-              <p style="color: #1f2666; font-size: 1.3rem">
-                TechStudio Academy
-              </p>
-              <p style="max-width: 22rem">
-                1, Ogunlesi Street, Off Bode Thomas, Awoyokun Bus Stop, Onipanu,
-                Lagos State.
-              </p>
-              <p style="display: flex; align-items: center; gap: 2px">
-                <img
-                  src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1710404776/email%20template/call_xe3nsv.png"
-                  alt=""
-                />
-                +2348109712678, +2348113800161, +2348126051769.
-              </p>
-              <div style="display: flex; gap: 5px">
-                <p style="display: flex; align-items: center; gap: 2px">
-                  <img
-                    src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1710404777/email%20template/sms_xvgebp.png"
-                    alt=""
-                  />
-                  info@techstudioacademy.com
-                </p>
-                <p style="display: flex; align-items: center; gap: 2px">
-                  <img
-                    src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1710404776/email%20template/chrome_cu9tjz.png"
-                    alt=""
-                  />
-                  www.techstudioacademy.com
-                </p>
-              </div>
-            </div>
-            <img
-              style="padding-left: 210px"
-              src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1710404777/email%20template/Frame_1000003521_hrbtah.png"
-              alt=""
-            />
-          </div>
-
-          <div>
-            <div
+          <div style="color: #5a5a5a; gap: 6px">
+            <p style="color: #1f2666; font-size: 1.3rem">TechStudio Academy</p>
+            <p style="max-width: 22rem">
+              1, Ogunlesi Street, Off Bode Thomas, Awoyokun Bus Stop, Onipanu,
+              Lagos State.
+            </p>
+            <p
               style="
-                display: flex;
-                justify-content: center;
+                display: grid;
+                grid-template-columns: 16px 600px;
                 align-items: center;
-                margin-block: 30px;
+                gap: 2px;
               "
+            >
+              <img
+                src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856886/database/call_bgbjng.svg"
+                style="width: 16px; height: 16px"
+                alt=""
+              />+2348109712678, +2348113800161, +2348126051769.
+            </p>
+            <div
+              style="display: grid; grid-template-columns: 42% 40%; gap: 5px"
             >
               <p
-                class=""
                 style="
-                  text-align: center;
-                  color: #fafafa;
-                  background-color: #1f2666;
-                  padding-block: 0.4rem;
-                  width: 19rem;
-                  border-radius: 6px;
+                  display: grid;
+                  grid-template-columns: 16px 80%;
+                  align-items: center;
+                  gap: 2px;
                 "
               >
-                STUDENT ENROLLMENT DOCKET
+                <img
+                  src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856887/database/sms_r0xugb.svg"
+                  style="width: 16px; height: 16px"
+                  alt=""
+                />info@techstudioacademy.com
               </p>
+              <p
+                style="
+                  display: grid;
+                  grid-template-columns: 16px 80%;
+                  align-items: center;
+                  gap: 2px;
+                "
+              >
+                <img
+                  src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856886/database/chrome_obopqi.svg"
+                  style="width: 16px; height: 16px"
+                  alt=""
+                />www.techstudioacademy.com
+              </p>
+            </div>
+          </div>
+          <img
+            src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856886/database/border-tecstudiologo_b3t9tx.svg"
+            style="place-self: end; width: 148px; height: 100px"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <div style="display: grid; place-items: center; margin-block: 30px">
+            <p
+              class=""
+              style="
+                text-align: center;
+                color: #fafafa;
+                background-color: #1f2666;
+                padding-block: 0.4rem;
+                width: 19rem;
+                border-radius: 6px;
+              "
+            >
+              STUDENT ENROLLMENT DOCKET
+            </p>
+          </div>
+
+          <div style="display: grid; width: 100%; gap: 2rem">
+            <div style="display: grid; width: 100%; gap: 22px">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 2fr 1fr;
+                  width: 100%;
+                "
+              >
+                <table style="width: 100%">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Full Name
+                        </p>
+                        <p style="color: #1f2666">{{name}}</p>
+                      </td>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Popularly Known As
+                        </p>
+                        <p style="color: #1f2666">{{pka}}</p>
+                      </td>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Student ID
+                        </p>
+                        <p style="color: #1f2666">{{studentId}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Email Address
+                        </p>
+                        <p style="color: #1f2666">{{email}}</p>
+                      </td>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Phone Number
+                        </p>
+                        <p style="color: #1f2666">{{phoneNumber}}</p>
+                      </td>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Course Cohort
+                        </p>
+                        <p style="color: #1f2666; font-size: 15px">
+                          {{courseCohort}}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Course Duration
+                        </p>
+                        <p style="color: #1f2666">16 Weeks</p>
+                      </td>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Course Type
+                        </p>
+                        <p style="color: #1f2666">{{classType}}</p>
+                      </td>
+                      <td>
+                        <p
+                          style="
+                            color: #5a5a5a;
+                            font-size: 12px;
+                            line-height: 2;
+                          "
+                        >
+                          Valid Till
+                        </p>
+                        <p style="color: #e00017">02-10-2025</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <img
+                  src="{{image}}"
+                  style="width: 200px; height: 100%"
+                  alt=""
+                />
+              </div>
             </div>
 
             <div
               style="
-                display: flex;
+                margin-block: 26px;
+                text-align: center;
+                color: #747474;
+                font-size: 13px;
+                display: grid;
+                gap: 25px;
                 align-items: center;
-                justify-content: space-between;
-                width: 100%;
-                gap: 2rem;
+                width: 33rem;
+                margin-inline: auto;
               "
             >
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  width: 100%;
-                  gap: 22px;
-                "
-              >
-                <div style="display: flex; gap: 4rem; width: 100%">
-                  <table style="width: 100%">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Full Name
-                          </p>
-                          <p style="color: #1f2666">{{name}}</p>
-                        </td>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Popularly Known As
-                          </p>
-                          <p style="color: #1f2666">{{pka}}</p>
-                        </td>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Student ID
-                          </p>
-                          <p style="color: #1f2666">{{studentId}}</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Email Address
-                          </p>
-                          <p style="color: #1f2666">{{email}}</p>
-                        </td>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Phone Number
-                          </p>
-                          <p style="color: #1f2666">{{phoneNumber}}</p>
-                        </td>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Course Cohort
-                          </p>
-                          <p style="color: #1f2666; font-size: 15px">
-                            {{courseCohort}}
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Course Duration
-                          </p>
-                          <p style="color: #1f2666"></p>
-                        </td>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Course Type
-                          </p>
-                          <p style="color: #1f2666">{{classType}}</p>
-                        </td>
-                        <td>
-                          <p
-                            style="
-                              color: #5a5a5a;
-                              font-size: 12px;
-                              line-height: 2;
-                            "
-                          >
-                            Valid Till
-                          </p>
-                          <p style="color: #e00017"></p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <img style="max-width: 30%" src={{image}} alt="" />
-                </div>
-                <div
-                  style="
-                    margin-block: 26px;
-                    text-align: center;
-                    color: #747474;
-                    font-size: 13px;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 25px;
-                    align-items: center;
-                    width: 33rem;
-                    margin-inline: auto;
-                  "
-                >
-                  <p style="color: #747474; font-size: 16px">
-                    IMPORTANT INFORMATION
-                  </p>
-                  <p>
-                    Please note the following as they guide the usage of the
-                    enrollment docket.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nihil autem eos, facilis aut blanditiis consequatur et optio
-                    obcaecati excepturi dicta illum iste ea velit, Lorem ipsum
-                    dolor, sit amet consectetur adipisicing eli
-                  </p>
-                </div>
-              </div>
+              <p style="color: #747474; font-size: 16px">
+                IMPORTANT INFORMATION
+              </p>
+              <p>
+                Please note the following as they guide the usage of the
+                enrollment docket.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
+                autem eos, facilis aut blanditiis consequatur et optio obcaecati
+                excepturi dicta illum iste ea velit, Lorem ipsum dolor sit amet
+                consectetur adipisicing elit.
+              </p>
             </div>
           </div>
         </div>
