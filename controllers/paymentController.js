@@ -52,6 +52,25 @@ const getStudentPaymentRecord = async (req, res) => {
   }
 };
 
+const getAsingleStudentPaymentRecord = async (req, res) => {
+  const { studentId, paymentId } = req.params;
+  try {
+    const student = await Student.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    // Find the payment record within the student's payments array
+    const payment = student.payments.id(paymentId);
+    if (!payment) {
+      return res.status(404).json({ error: "Payment record not found" });
+    }
+    res.status(200).json({ success: true, payment });
+  } catch {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const addPaymentRecord = async (req, res) => {
   const { studentId } = req.params;
   const { adminId } = req.user;
@@ -224,4 +243,5 @@ module.exports = {
   addPaymentRecord,
   editPaymentRecord,
   sendReminder,
+  getAsingleStudentPaymentRecord,
 };

@@ -13,6 +13,7 @@ const {
   addPaymentRecord,
   editPaymentRecord,
   sendReminder,
+  getAsingleStudentPaymentRecord,
 } = require("../controllers/paymentController");
 const auth = require("../middleware/auth");
 
@@ -27,7 +28,9 @@ router
   .route("/:studentId/payment")
   .get(getStudentPaymentRecord)
   .post(auth, addPaymentRecord);
+
 router.patch("/:studentId/payment/:paymentId", auth, editPaymentRecord);
+router.get("/:studentId/payment/:paymentId", getAsingleStudentPaymentRecord);
 
 router.post("/send", sendReminder);
 
