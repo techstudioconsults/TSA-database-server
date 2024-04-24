@@ -13,9 +13,20 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Open
       Sans", system-ui, sans-serif; } body { display: grid; place-items: center;
-      /* height: 100vh; */ width: 100%; } .container { background-color:
-      #fafafa; width: 60rem; margin: 0 auto; border-radius: 20px; box-shadow: 0
-      0 2px #5a5a5a; margin-block: 2rem; }
+      /* height: 100vh; */ width: 100%; padding: 1rem; } .container {
+      background-color: #fafafa; max-width: 60rem; width: 100%; margin: 0 auto;
+      border-radius: 20px; box-shadow: 0 0 2px #5a5a5a; margin-block: 2rem; }
+      @media screen and (max-width: 768px) { /* .container { width: 420px; } */
+      .wrapper { padding-inline: 0.5rem !important; } .website { display: block
+      !important; margin: 0 auto !important; } .academy { text-align: center
+      !important; } .location { display: grid; grid-template-columns: repeat(1,
+      1fr) !important; /* place-items: center !important; */ } .tech-logo {
+      place-self: center !important; margin-bottom: 8px; } .info { display:
+      grid; grid-template-columns: repeat(1, 1fr) !important; place-items:
+      center !important; /* grid-auto-flow: column; */ } .location
+      div:nth-child(1) { order: 2; } .location div:nth-child(2) { order: 1;
+      width: 70%; } .info table:nth-child(1) { order: 2; } .info
+      img:nth-child(2) { order: 1; margin-bottom: 8px; } }
     </style>
   </head>
   <body>
@@ -38,39 +49,43 @@
         />
       </div>
 
-      <div style="padding: 2rem; padding-block: 3rem">
+      <div class="wrapper" style="padding: 2rem; padding-block: 3rem">
         <div
+          class="location"
           style="
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             width: 100%;
-            justify-content: space-between;
-            align-items: center;
-            place-items: space-between;
           "
         >
           <div style="color: #5a5a5a; gap: 6px">
-            <p style="color: #1f2666; font-size: 1.3rem">TechStudio Academy</p>
-            <p style="max-width: 22rem">
+            <p style="color: #1f2666; font-size: 1.3rem" class="academy">
+              TechStudio Academy
+            </p>
+            <p style="max-width: 22rem" class="academy">
               1, Ogunlesi Street, Off Bode Thomas, Awoyokun Bus Stop, Onipanu,
               Lagos State.
             </p>
             <p
+              class="phone"
               style="
                 display: grid;
-                grid-template-columns: 16px 600px;
+                grid-template-columns: 16px 90%;
                 align-items: center;
                 gap: 2px;
+                width: 100%;
               "
             >
               <img
                 src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856886/database/call_bgbjng.svg"
                 style="width: 16px; height: 16px"
                 alt=""
-              />+2348109712678, +2348113800161, +2348126051769.
+              />
+              +2348109712678, +2348113800161, +2348126051769.
             </p>
             <div
-              style="display: grid; grid-template-columns: 42% 40%; gap: 5px"
+              class="website"
+              style="display: grid; grid-template-columns: 50% 50%; gap: 5px"
             >
               <p
                 style="
@@ -103,6 +118,7 @@
             </div>
           </div>
           <img
+            class="tech-logo"
             src="https://res.cloudinary.com/dgde8cwjk/image/upload/v1713856886/database/border-tecstudiologo_b3t9tx.svg"
             style="place-self: end; width: 148px; height: 100px"
             alt=""
@@ -129,9 +145,11 @@
           <div style="display: grid; width: 100%; gap: 2rem">
             <div style="display: grid; width: 100%; gap: 22px">
               <div
+                class="info"
                 style="
                   display: grid;
                   grid-template-columns: 2fr 1fr;
+
                   width: 100%;
                 "
               >
@@ -257,7 +275,7 @@
                 </table>
                 <img
                   src="{{image}}"
-                  style="width: 200px; height: 100%"
+                  style="width: 200px; height: 209px"
                   alt=""
                 />
               </div>
@@ -272,7 +290,7 @@
                 display: grid;
                 gap: 25px;
                 align-items: center;
-                width: 33rem;
+                width: 75%;
                 margin-inline: auto;
               "
             >
