@@ -164,12 +164,25 @@ const getAllStudents = async (req, res) => {
       (sum, student) => sum + student.balance,
       0
     );
+
+    const studentsWithTotalAmountPaid = await Promise.all(
+      students.map(async (student) => {
+        const totalAmountPaid = student.payments.reduce(
+          (sum, payment) => sum + payment.amount,
+          0
+        );
+        return {
+          ...student._doc,
+          totalAmountPaid,
+        };
+      })
+    );
     res.status(200).json({
       success: true,
       numOfStudents: allStudents.length,
       revenue: totalAmountPaid,
       balance: totalBalance,
-      students,
+      students: studentsWithTotalAmountPaid,
     });
   } catch (error) {
     console.error(error);
