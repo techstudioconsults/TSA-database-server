@@ -181,6 +181,11 @@ const getAStudent = async (req, res) => {
   const { studentId } = req.params;
   try {
     const student = await Student.findById({ _id: studentId });
+    // Calculate the total amount paid
+    // const totalAmountPaid = student.payments.reduce(
+    //   (sum, payment) => sum + payment.amount,
+    //   0
+    // );
     if (!student) {
       return res.status(404).json({ error: "Student Not Found" });
     }

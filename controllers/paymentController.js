@@ -31,6 +31,10 @@ const getStudentPaymentRecord = async (req, res) => {
       courseCohort,
     } = student;
     const sortedPayments = payments.sort((a, b) => b.datePaid - a.datePaid);
+    const totalAmountpaid = student.payments.reduce(
+      (sum, payment) => sum + payment.amount,
+      0
+    );
     res.status(200).json({
       success: true,
       payments: sortedPayments,
@@ -40,6 +44,7 @@ const getStudentPaymentRecord = async (req, res) => {
       courseFee,
       courseCohort,
       modifiedBy,
+      totalAmountpaid,
     });
   } catch (error) {
     console.log(error);
