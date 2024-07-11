@@ -6,6 +6,8 @@ const getCourseFee = (classType, courseCohort) => {
     courseFee = getFullstackFee(classType);
   } else if (cohortLower.includes("frontend")) {
     courseFee = getFrontendFee(classType);
+  } else if (cohortLower.includes("digital")) {
+    courseFee = getDigitalMarketingFee(classType);
   } else if (cohortLower.includes("data")) {
     courseFee = getDataFee(classType);
   } else if (cohortLower.includes("cyber")) {
@@ -47,11 +49,11 @@ const getFrontendFee = (classType) => {
 const getDataFee = (classType) => {
   switch (classType) {
     case "weekday":
-      return 400000;
+      return 500000;
     case "weekend":
       return 400000;
     case "online":
-      return 250000;
+      return 200000;
     default:
       return 0;
   }
@@ -60,6 +62,7 @@ const getDataFee = (classType) => {
 const getCyberFee = (classType) => {
   switch (classType) {
     case "weekday":
+      return 500000;
     case "weekend":
       return 400000;
     default:
@@ -74,6 +77,19 @@ const getProductDesignFee = (classType) => {
       return 350000;
     case "online":
       return 200000;
+    default:
+      return 0;
+  }
+};
+
+const getDigitalMarketingFee = (classType) => {
+  switch (classType) {
+    case "weekday":
+      return 200000;
+    case "weekend":
+      return 0;
+    case "online":
+      return 0;
     default:
       return 0;
   }
@@ -105,6 +121,8 @@ const getCourseCode = (courseCohort) => {
     return "04";
   } else if (courseCohort.toLowerCase().includes("cyber")) {
     return "05";
+  } else if (courseCohort.toLowerCase().includes("digital")) {
+    return "06";
   }
 };
 const createCourseDuration = (courseCohort) => {
@@ -118,6 +136,8 @@ const createCourseDuration = (courseCohort) => {
     return 12;
   } else if (courseCohort.toLowerCase().includes("cyber")) {
     return 12;
+  } else if (courseCohort.toLowerCase().includes("digital")) {
+    return 4;
   } else {
     return null; // Return null for unknown course cohorts
   }
