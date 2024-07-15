@@ -34,7 +34,10 @@ const sendingDocketEmail = async ({
   studentId,
   phoneNumber,
   classType,
-  courseCohort, pka, image
+  courseCohort,
+  pka,
+  image,
+  courseDuration,
 }) => {
   try {
     // Compile the email template with provided data
@@ -44,7 +47,10 @@ const sendingDocketEmail = async ({
       studentId,
       phoneNumber,
       classType,
-      courseCohort, pka, image
+      courseCohort,
+      pka,
+      image,
+      courseDuration,
     });
 
     // Send the reminder email
