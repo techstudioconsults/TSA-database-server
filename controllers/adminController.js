@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 //handleAdminRegister
 const handleAdminRegister = async (req, res) => {
-  const { name, password, email } = req.body;
+  const { name, password, email, role } = req.body;
   try {
     const payload = checkInputs(name, password, email);
     if (!payload) {
@@ -19,10 +19,16 @@ const handleAdminRegister = async (req, res) => {
 
     //hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    const admin = await Admin.create({ name, password: hashedPassword, email });
-    res
-      .status(201)
-      .json({ success: true, admin: { name: admin.name, email: admin.email } });
+    const admin = await Admin.create({
+      name,
+      password: hashedPassword,
+      email,
+      role,
+    });
+    res.status(201).json({
+      success: true,
+      admin: { name: admin.name, email: admin.email, role: admin.role },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
