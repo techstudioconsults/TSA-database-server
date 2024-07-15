@@ -56,6 +56,16 @@ const handleAddStudent = async (req, res) => {
     emergencyContactNumber,
     amount
   );
+  const existingStudent = await Student.findOne({
+    fullName,
+    courseCohort,
+  });
+
+  if (existingStudent) {
+    return res
+      .status(400)
+      .json({ error: "You have already registered for this course" });
+  }
 
   const courseDuration = createCourseDuration(courseCohort);
 
@@ -128,7 +138,7 @@ const handleAddStudent = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message || "Internal server error" });
   }
 };
 
