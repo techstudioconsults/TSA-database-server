@@ -257,6 +257,7 @@ const handleShareEmail = async (req, res) => {
       courseCohort,
       pka,
       image,
+      courseDuration,
     } = student;
 
     await sendingDocketEmail({
@@ -268,6 +269,7 @@ const handleShareEmail = async (req, res) => {
       courseCohort,
       pka,
       image,
+      courseDuration,
     });
 
     res
