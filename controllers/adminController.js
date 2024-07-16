@@ -63,7 +63,7 @@ const handleAdminLogin = async (req, res) => {
     res.status(200).json({
       success: true,
       token,
-      admin: { name: admin.name, email: admin.email },
+      admin: { name: admin.name, email: admin.email, role: admin.role },
     });
   } catch (error) {
     console.log(error);
