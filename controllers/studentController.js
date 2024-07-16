@@ -146,6 +146,9 @@ const getAllStudents = async (req, res) => {
   const { searchTerm } = req.query;
   const queryObject = {};
   // search by studentId, name, courseCohort, pka
+  const limit = 20;
+  const page = parseInt(req.query.page) || 1;
+  const skip = (page - 1) * limit;
   if (searchTerm) {
     const regex = { $regex: searchTerm, $options: "i" };
     queryObject.$or = [
@@ -157,7 +160,10 @@ const getAllStudents = async (req, res) => {
   }
 
   try {
-    const students = await Student.find(queryObject).sort("-createdAt");
+    const students = await Student.find(queryObject)
+      .sort("-createdAt")
+      .limit(limit)
+      .skip(skip);
     const allStudents = await Student.find().sort("-createdAt");
     // Calculate totalAmountPaid and totalBalance
     const totalAmountPaid = allStudents.reduce(
@@ -193,6 +199,8 @@ const getAllStudents = async (req, res) => {
       revenue: totalAmountPaid,
       balance: totalBalance,
       students: studentsWithTotalAmountPaid,
+      currentPage: page,
+      totalPages: Math.ceil(students.length / limit),
     });
   } catch (error) {
     console.error(error);
