@@ -48,7 +48,7 @@ const getStudentPaymentRecord = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -67,7 +67,7 @@ const getAsingleStudentPaymentRecord = async (req, res) => {
     res.status(200).json({ success: true, payment });
   } catch {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -133,7 +133,7 @@ const addPaymentRecord = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -207,7 +207,7 @@ const editPaymentRecord = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -234,7 +234,7 @@ const sendReminder = async (req, res) => {
       .json({ success: true, message: "Reminder email sent successfully" });
   } catch (error) {
     console.error("Error sending reminder:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 

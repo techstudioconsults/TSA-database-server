@@ -138,7 +138,7 @@ const handleAddStudent = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: error.message || "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -204,7 +204,7 @@ const getAllStudents = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -223,7 +223,7 @@ const getAStudent = async (req, res) => {
     res.status(200).json({ success: true, student });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -244,7 +244,7 @@ const handleEditStudent = async (req, res) => {
       .json({ success: true, message: "Student info updated correctly" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -285,7 +285,7 @@ const handleShareEmail = async (req, res) => {
       .json({ success: true, message: "Reminder email sent successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message || "Internal server error" });
   }
 };
 
@@ -311,7 +311,7 @@ const getStudentViaStudentId = async (req, res) => {
     }
     res.status(200).json(student);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
