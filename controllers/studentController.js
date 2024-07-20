@@ -193,14 +193,15 @@ const getAllStudents = async (req, res) => {
         };
       })
     );
+    const totalStudents = await Student.countDocuments(queryObject);
     res.status(200).json({
       success: true,
       numOfStudents: allStudents.length,
       revenue: totalAmountPaid,
       balance: totalBalance,
-      students: studentsWithTotalAmountPaid,
       currentPage: page,
-      totalPages: Math.ceil(students.length / limit),
+      totalPages: Math.ceil(totalStudents / limit),
+      students: studentsWithTotalAmountPaid,
     });
   } catch (error) {
     console.error(error);
