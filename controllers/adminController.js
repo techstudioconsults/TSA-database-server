@@ -31,7 +31,7 @@ const handleAdminRegister = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
@@ -66,9 +66,18 @@ const handleAdminLogin = async (req, res) => {
       admin: { name: admin.name, email: admin.email, role: admin.role },
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 
-module.exports = { handleAdminLogin, handleAdminRegister };
+const getUserDetails = async (req, res) => {
+  const { adminId } = req.user;
+  try {
+    const admin = await Admin.findById({ _id: adminId }).select("-password");
+    res.status(200).json({ success: true, admin });
+  } catch (error) {
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+};
+
+module.exports = { handleAdminLogin, handleAdminRegister, getUserDetails };
