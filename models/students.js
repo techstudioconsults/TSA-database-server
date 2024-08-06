@@ -138,6 +138,9 @@ studentSchema.pre("save", function (next) {
 
   // Update paymentStatus to 'full' if the balance is 0
   this.paymentStatus = this.balance === 0 ? "full" : "part";
+  if (this.balance < 0) {
+    this.balance = 0;
+  }
 
   next();
 });
